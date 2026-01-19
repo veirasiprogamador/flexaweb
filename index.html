@@ -15,7 +15,7 @@
             --text-main: #0f172a;
             --text-sub: #94a3b8;
             --border-color: #f1f5f9;
-            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
@@ -35,27 +35,66 @@
         .view.active { display: block; }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* --- MELHORIA NA TELA INICIAL --- */
+        .welcome-text { text-align: center; margin-bottom: 45px; }
+        .welcome-text h1 { font-size: 32px; font-weight: 900; letter-spacing: -1px; margin-bottom: 8px; }
+        .welcome-text p { color: var(--text-sub); font-size: 16px; font-weight: 500; }
 
         .option-card {
             display: flex;
             align-items: center;
-            padding: 26px;
-            border-radius: 24px;
-            margin-bottom: 18px;
+            padding: 24px;
+            border-radius: 28px;
+            margin-bottom: 20px;
             cursor: pointer;
             background: var(--card-white);
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+            border: 2px solid transparent;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--brand-orange);
+            box-shadow: 0 20px 35px rgba(245, 130, 32, 0.12);
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
             transition: var(--transition);
         }
-        .option-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--brand-orange);
-            box-shadow: 0 12px 24px rgba(245, 130, 32, 0.1);
+
+        .card-loja .icon-box { background: #fff7ed; color: var(--brand-orange); }
+        .card-entrega .icon-box { background: #eff6ff; color: #3b82f6; }
+
+        .option-card h2 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+        .option-card p { font-size: 14px; color: var(--text-sub); line-height: 1.4; }
+
+        .badge-card {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: #f1f5f9;
+            color: var(--text-sub);
         }
+        /* ------------------------------- */
 
         .auth-card {
             background: var(--card-white);
@@ -84,27 +123,11 @@
             box-shadow: 0 0 0 4px rgba(245, 130, 32, 0.1);
         }
 
-        .input-wrapper i {
-            flex-shrink: 0;
-            color: var(--text-sub);
-            display: flex;
-            align-items: center;
-        }
-
+        .input-wrapper i { flex-shrink: 0; color: var(--text-sub); display: flex; align-items: center; }
         .input-wrapper i.icon-right { cursor: pointer; }
         .input-wrapper i.icon-right:hover { color: var(--brand-orange); }
 
-        input { 
-            flex: 1;
-            min-width: 0;
-            padding: 18px 0;
-            background: transparent;
-            border: none;
-            color: var(--text-main);
-            outline: none;
-            /* Font-size em 16px para evitar o zoom automático em dispositivos móveis */
-            font-size: 16px;
-        }
+        input { flex: 1; min-width: 0; padding: 18px 0; background: transparent; border: none; color: var(--text-main); outline: none; font-size: 16px; }
 
         .btn-main {
             width: 100%;
@@ -152,11 +175,7 @@
             font-weight: 600;
             text-transform: uppercase;
         }
-        .divider::before, .divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid var(--border-color);
-        }
+        .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border-color); }
         .divider:not(:empty)::before { margin-right: .75em; }
         .divider:not(:empty)::after { margin-left: .75em; }
 
@@ -174,18 +193,31 @@
 
     <div class="container">
         <section id="view-inicio" class="view active">
-            <h1 style="text-align:center; margin-bottom:40px; font-weight: 800;">O que você deseja</h1>
-            <div class="option-card" onclick="irParaCadastro('loja')">
-                <div style="margin-right:20px; background:#fff7ed; padding:12px; border-radius:14px; color:var(--brand-orange);">
-                    <i data-lucide="store" size="28"></i>
-                </div>
-                <div class="content"><h2>Enviar pacotes</h2><p>Serviços logísticos para sua loja</p></div>
+            <div class="welcome-text">
+                <h1>FLEX<span>A</span></h1>
+                <p>Escolha como deseja usar o app</p>
             </div>
-            <div class="option-card" onclick="irParaCadastro('entrega')">
-                <div style="margin-right:20px; background:#fff7ed; padding:12px; border-radius:14px; color:var(--brand-orange);">
-                    <i data-lucide="truck" size="28"></i>
+
+            <div class="option-card card-loja" onclick="irParaCadastro('loja')">
+                <span class="badge-card">Logística</span>
+                <div class="icon-box">
+                    <i data-lucide="store" size="32"></i>
                 </div>
-                <div class="content"><h2>Fazer entregas</h2><p>Seja um entregador parceiro</p></div>
+                <div class="content">
+                    <h2>Enviar pacotes</h2>
+                    <p>Ideal para lojistas que buscam rapidez.</p>
+                </div>
+            </div>
+
+            <div class="option-card card-entrega" onclick="irParaCadastro('entrega')">
+                <span class="badge-card">Renda</span>
+                <div class="icon-box">
+                    <i data-lucide="truck" size="32"></i>
+                </div>
+                <div class="content">
+                    <h2>Fazer entregas</h2>
+                    <p>Seja parceiro e fature por cada rota.</p>
+                </div>
             </div>
         </section>
 
@@ -200,35 +232,20 @@
                 <form id="form-cadastrar" class="hidden">
                     <div class="form-group">
                         <label id="label-nome">Nome da loja</label>
-                        <div class="input-wrapper">
-                            <i data-lucide="user" size="20"></i>
-                            <input type="text" id="input-nome" placeholder="Digite o nome da loja">
-                        </div>
+                        <div class="input-wrapper"><i data-lucide="user" size="20"></i><input type="text" id="input-nome" placeholder="Nome da sua loja"></div>
                     </div>
                     <div class="form-group" id="group-cnh">
                         <label>Número CNH</label>
-                        <div class="input-wrapper">
-                            <i data-lucide="file-text" size="20"></i>
-                            <input type="text" placeholder="000.000.000-00">
-                        </div>
+                        <div class="input-wrapper"><i data-lucide="file-text" size="20"></i><input type="text" placeholder="000.000.000-00"></div>
                     </div>
                     <div class="form-group"><label>E-mail</label><div class="input-wrapper"><i data-lucide="mail" size="20"></i><input type="email" placeholder="seu@email.com"></div></div>
                     <div class="form-group">
                         <label>Senha</label>
-                        <div class="input-wrapper">
-                            <i data-lucide="lock" size="20"></i>
-                            <input type="password" id="pass-cad" placeholder="••••••••">
-                            <i data-lucide="eye" class="icon-right" size="20" onclick="togglePass('pass-cad', this)"></i>
-                        </div>
+                        <div class="input-wrapper"><i data-lucide="lock" size="20"></i><input type="password" id="pass-cad" placeholder="••••••••"><i data-lucide="eye" class="icon-right" size="20" onclick="togglePass('pass-cad', this)"></i></div>
                     </div>
                     <button type="button" class="btn-main">Criar Conta</button>
-                    
                     <div class="divider">ou</div>
-                    <button type="button" class="btn-google">
-                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
-                        Cadastrar com Google
-                    </button>
-
+                    <button type="button" class="btn-google"><img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">Cadastrar com Google</button>
                     <p class="btn-voltar" onclick="navegar('view-inicio')">← Voltar</p>
                 </form>
 
@@ -236,20 +253,11 @@
                     <div class="form-group"><label>E-mail</label><div class="input-wrapper"><i data-lucide="mail" size="20"></i><input type="email" placeholder="Login de acesso"></div></div>
                     <div class="form-group">
                         <label>Senha</label>
-                        <div class="input-wrapper">
-                            <i data-lucide="lock" size="20"></i>
-                            <input type="password" id="pass-login" placeholder="Sua senha">
-                            <i data-lucide="eye" class="icon-right" size="20" onclick="togglePass('pass-login', this)"></i>
-                        </div>
+                        <div class="input-wrapper"><i data-lucide="lock" size="20"></i><input type="password" id="pass-login" placeholder="Sua senha"><i data-lucide="eye" class="icon-right" size="20" onclick="togglePass('pass-login', this)"></i></div>
                     </div>
                     <button type="button" class="btn-main">Entrar na Flexa</button>
-                    
                     <div class="divider">ou</div>
-                    <button type="button" class="btn-google">
-                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
-                        Entrar com Google
-                    </button>
-
+                    <button type="button" class="btn-google"><img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">Entrar com Google</button>
                     <div style="text-align:center; margin-top:15px;"><a href="javascript:void(0)" onclick="navegar('view-recuperar')" style="color:var(--text-sub); font-size:13px; text-decoration:none; font-weight: 500;">Esqueceu a senha?</a></div>
                     <p class="btn-voltar" onclick="navegar('view-inicio')">← Voltar</p>
                 </form>
