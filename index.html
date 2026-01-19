@@ -98,7 +98,6 @@
 
         .content { flex: 1; }
         
-        /* AJUSTE RESPONSIVO PARA A TAG NÃO CORTAR O TEXTO */
         .card-header {
             display: flex;
             justify-content: space-between;
@@ -130,7 +129,6 @@
         }
         .footer-info a { color: var(--brand-orange); text-decoration: none; font-weight: 700; }
 
-        /* --- AUTH & FORMS --- */
         .auth-card {
             background: var(--card-white);
             padding: 35px 25px;
@@ -287,10 +285,17 @@
                         <div class="input-wrapper"><i data-lucide="file-text" size="20"></i><input type="text" placeholder="000.000.000-00"></div>
                     </div>
                     <div class="form-group"><label>E-mail</label><div class="input-wrapper"><i data-lucide="mail" size="20"></i><input type="email" placeholder="seu@email.com"></div></div>
+                    
                     <div class="form-group">
                         <label>Senha</label>
-                        <div class="input-wrapper"><i data-lucide="lock" size="20"></i><input type="password" id="pass-cad" placeholder="••••••••"><i data-lucide="eye" class="icon-right" size="20" onclick="togglePass('pass-cad', this)"></i></div>
+                        <div class="input-wrapper"><i data-lucide="lock" size="20"></i><input type="password" id="pass-cad" placeholder="Crie uma senha"><i data-lucide="eye" class="icon-right" size="20" onclick="togglePass('pass-cad', this)"></i></div>
                     </div>
+
+                    <div class="form-group">
+                        <label>Confirmar Senha</label>
+                        <div class="input-wrapper"><i data-lucide="shield-check" size="20"></i><input type="password" id="pass-conf" placeholder="Repita a senha"><i data-lucide="eye" class="icon-right" size="20" onclick="togglePass('pass-conf', this)"></i></div>
+                    </div>
+
                     <button type="button" class="btn-main">Criar Conta</button>
                     <div class="divider">ou</div>
                     <button type="button" class="btn-google"><img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">Cadastrar com Google</button>
