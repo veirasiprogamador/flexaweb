@@ -31,7 +31,6 @@
             position: relative;
         }
 
-        /* --- ANIMAÇÃO DE FUNDO --- */
         .bg-sphere {
             position: fixed;
             border-radius: 50%;
@@ -66,7 +65,7 @@
         .option-card {
             display: flex;
             align-items: center;
-            padding: 26px;
+            padding: 24px;
             border-radius: 28px;
             margin-bottom: 20px;
             cursor: pointer;
@@ -75,7 +74,6 @@
             border: 2px solid transparent;
             box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
             transition: var(--transition);
-            position: relative;
         }
 
         .option-card:hover {
@@ -98,20 +96,29 @@
         .card-loja .icon-box { background: #fff7ed; color: var(--brand-orange); }
         .card-entrega .icon-box { background: #eff6ff; color: #3b82f6; }
 
-        .option-card h2 { font-size: 19px; font-weight: 700; margin-bottom: 4px; }
+        .content { flex: 1; }
+        
+        /* AJUSTE RESPONSIVO PARA A TAG NÃO CORTAR O TEXTO */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+            gap: 10px;
+        }
+
+        .option-card h2 { font-size: 18px; font-weight: 700; }
         .option-card p { font-size: 14px; color: var(--text-sub); line-height: 1.4; }
 
         .badge-card {
-            position: absolute;
-            top: 22px;
-            right: 22px;
             font-size: 10px;
             font-weight: 800;
             text-transform: uppercase;
-            padding: 4px 12px;
+            padding: 4px 10px;
             border-radius: 20px;
             background: #f1f5f9;
             color: var(--text-sub);
+            white-space: nowrap;
         }
 
         .footer-info {
@@ -123,7 +130,7 @@
         }
         .footer-info a { color: var(--brand-orange); text-decoration: none; font-weight: 700; }
 
-        /* --- AUTH & FORMS (MANTIDOS) --- */
+        /* --- AUTH & FORMS --- */
         .auth-card {
             background: var(--card-white);
             padding: 35px 25px;
@@ -230,23 +237,27 @@
             </div>
 
             <div class="option-card card-loja" onclick="irParaCadastro('loja')">
-                <span class="badge-card">Negócios</span>
                 <div class="icon-box">
                     <i data-lucide="store" size="32"></i>
                 </div>
                 <div class="content">
-                    <h2>Enviar pacotes</h2>
+                    <div class="card-header">
+                        <h2>Enviar pacotes</h2>
+                        <span class="badge-card">Negócios</span>
+                    </div>
                     <p>Soluções inteligentes para expandir sua loja e entregas.</p>
                 </div>
             </div>
 
             <div class="option-card card-entrega" onclick="irParaCadastro('entrega')">
-                <span class="badge-card">Parceiro</span>
                 <div class="icon-box">
                     <i data-lucide="truck" size="32"></i>
                 </div>
                 <div class="content">
-                    <h2>Fazer entregas</h2>
+                    <div class="card-header">
+                        <h2>Fazer entregas</h2>
+                        <span class="badge-card">Parceiro</span>
+                    </div>
                     <p>Faça seu próprio horário e aumente sua renda diária.</p>
                 </div>
             </div>
